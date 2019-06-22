@@ -1,0 +1,199 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>可控制图片放大缩小还原移动效果的JS网页图片查看器</title>
+<meta http-equiv="imagetoolbar" content="no">
+<style type="text/css">
+    body
+    {
+        font-family: "Verdana" , "Arial" , "Helvetica" , "sans-serif";
+        font-size: 12px;
+        line-height: 180%;
+    }
+    td
+    {
+        font-size: 12px;
+        line-height: 150%;
+    }
+</style>
+<script language="JavaScript">
+    drag = 0
+    move = 0
+ 
+    // 拖拽对象
+    // 参见：http://blog.sina.com.cn/u/4702ecbe010007pe
+    var ie = document.all;
+    var nn6 = document.getElementById && !document.all;
+    var isdrag = false;
+    var y, x;
+    var oDragObj;
+ 
+    function moveMouse(e) {
+        if (isdrag) {
+            oDragObj.style.top = (nn6 ? nTY + e.clientY - y : nTY + event.clientY - y) + "px";
+            oDragObj.style.left = (nn6 ? nTX + e.clientX - x : nTX + event.clientX - x) + "px";
+            return false;
+        }
+    }
+ 
+    function initDrag(e) {
+        var oDragHandle = nn6 ? e.target : event.srcElement;
+        var topElement = "HTML";
+        while (oDragHandle.tagName != topElement && oDragHandle.className != "dragAble") {
+            oDragHandle = nn6 ? oDragHandle.parentNode : oDragHandle.parentElement;
+        }
+        if (oDragHandle.className == "dragAble") {
+            isdrag = true;
+            oDragObj = oDragHandle;
+            nTY = parseInt(oDragObj.style.top + 0);
+            y = nn6 ? e.clientY : event.clientY;
+            nTX = parseInt(oDragObj.style.left + 0);
+            x = nn6 ? e.clientX : event.clientX;
+            document.onmousemove = moveMouse;
+            return false;
+        }
+    }
+    document.onmousedown = initDrag;
+    document.onmouseup = new Function("isdrag=false");
+ 
+    function clickMove(s) {
+        if (s == "up") {
+            dragObj.style.top = parseInt(dragObj.style.top) + 100;
+        } else if (s == "down") {
+            dragObj.style.top = parseInt(dragObj.style.top) - 100;
+        } else if (s == "left") {
+            dragObj.style.left = parseInt(dragObj.style.left) + 100;
+        } else if (s == "right") {
+            dragObj.style.left = parseInt(dragObj.style.left) - 100;
+        }
+ 
+    }
+ 
+    function smallit() {
+        var height1 = images1.height;
+        var width1 = images1.width;
+        images1.height = height1 / 1.2;
+        images1.width = width1 / 1.2;
+    }
+ 
+    function bigit() {
+        var height1 = images1.height;
+        var width1 = images1.width;
+        images1.height = height1 * 1.2;
+        images1.width = width1 * 1.2;
+    }
+    function realsize() {
+        images1.height = images2.height;
+        images1.width = images2.width;
+        block1.style.left = 0;
+        block1.style.top = 0;
+ 
+    }
+ 
+    window.onload = function () {
+        var height1 = document.body.clientHeight;
+        var width1 = document.body.clientWidth;
+        images1.height = height1 ;
+        images1.width = width1;
+    }
+ 
+ 
+ 
+</script>
+<!--<script language="JavaScript" type="text/JavaScript">
+    function MM_reloadPage(init) {
+        alert("b");
+     //reloads the window if Nav4 resized
+        if (init == true) with (navigator) {
+            if ((appName == "Netscape") && (parseInt(appVersion) == 4)) {
+                alert("1");
+                document.MM_pgW = innerWidth; document.MM_pgH = innerHeight; onresize = MM_reloadPage;
+            }
+        }
+        else if (innerWidth != document.MM_pgW || innerHeight != document.MM_pgH) {
+            alert("2");
+            location.reload();
+        }
+    }
+    MM_reloadPage(true);
+</script>-->
+<style type="text/css">
+<!--
+td, a { font-size:12px; color:#000000 }
+#Layer1 { position:absolute; z-index:100; top: 10px; }
+#Layer2 { position:absolute; z-index:1; }
+-->
+</style>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" oncontextmenu="return false"
+    ondragstart="return false" onselectstart="return false" onselect="document.selection.empty()"
+    oncopy="document.selection.empty()" onbeforecopy="return false" onmouseup="document.selection.empty()"
+    style="overflow-y: hidden; overflow-x: hidden;">
+    <div id="Layer1">
+        <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <img src="up.gif" width="20" height="20" style="cursor: hand" onclick="clickMove('up')"
+                        title="向上">
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="left.gif" width="20" height="20" style="cursor: hand" onclick="clickMove('left')"
+                        title="向左">
+                </td>
+                <td>
+                    <img src="zoom.gif" width="20" height="20" style="cursor: hand" onclick="realsize();"
+                        title="还原">
+                </td>
+                <td>
+                    <img src="right.gif" width="20" height="20" style="cursor: hand" onclick="clickMove('right')"
+                        title="向右">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <img src="down.gif" width="20" height="20" style="cursor: hand" onclick="clickMove('down')"
+                        title="向下">
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <img src="zoom_in.gif" width="20" height="20" style="cursor: hand" onclick="bigit();"
+                        title="放大">
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <img src="zoom_out.gif" width="20" height="20" style="cursor: hand" onclick="smallit();"
+                        title="缩小">
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id='hiddenPic' style='position: absolute; left: 0px; top: 0px; width: 0px; height: 0px;
+        z-index: 1; visibility: hidden;'>
+        <img name='images2' src='uqm_map_full.png' border='0'  />
+    </div>
+    <div id='block1' onmouseout='drag=0' onmouseover='dragObj=block1; drag=1;' style='z-index: 10;
+        height: 0; left: 0px; position: absolute; top: 0px; width: 0' class="dragAble">
+        <img name='images1' src='uqm_map_full.png' border='0' />
+    </div>
+</body>
+</html>

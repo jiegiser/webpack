@@ -1,0 +1,63 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "sideEffects": [
+    "*.css"
+  ],
+  "description": "",
+  "private": true,
+  "scripts": {
+    "bundle": "webpack",
+    "watch": "webpack --watch",
+    "dev": "webpack-dev-server --config ./build/webpack.common.js",
+    "server": "node server.js",
+    "build": "webpack --env.production --config ./build/webpack.common.js",
+    "test": "webpack-dev-server",
+    "dev-build": "webpack --config ./build/webpack.common.js",
+    "test-build": "webpack --profile --json > stats.json --config ./build/webpack.dev.js"
+  },
+  "author": "jiegiser",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime-corejs2": "^7.4.5",
+    "autoprefixer": "^9.5.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^2.0.2",
+    "css-loader": "^2.1.1",
+    "express": "^4.17.0",
+    "file-loader": "^3.0.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "import-loader": "^1.0.1",
+    "imports-loader": "^0.8.0",
+    "jquery": "^3.4.1",
+    "mini-css-extract-plugin": "^0.7.0",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "vue-loader": "^15.7.0",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
+    "@babel/runtime-corejs2": "^7.4.5",
+    "core-js": "^2.6.5",
+    "lodash": "^4.17.11",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.31.0"
+  }
+}

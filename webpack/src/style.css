@@ -1,0 +1,4 @@
+/* 选择div的子元素为奇数的元素 */
+div:nth-of-type(odd) {
+  background: yellow
+}
